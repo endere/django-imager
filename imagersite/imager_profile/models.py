@@ -36,6 +36,7 @@ class UserProfile(models.Model):
     citizenship = models.CharField(max_length=100)
     objects = models.Manager()
     active = ImageActiveProfile()
+    # email_confirmed = models.BooleanField(default=False)
 
     @property
     def is_active(self):
