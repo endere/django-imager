@@ -44,7 +44,6 @@ class UserProfile(models.Model):
 
     def __repr__(self):
         return """
-    username: {}
     social_status: {}
     social_security_number: {}
     blood_type: {}
@@ -60,7 +59,6 @@ class UserProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def make_profile_for_new_user(sender, **kwargs):
-    import pdb; pdb.set_trace()
     if kwargs['created']:
         new_profile = UserProfile(user=kwargs['instance'])
         new_profile.save()
