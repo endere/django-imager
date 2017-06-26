@@ -1,0 +1,5 @@
+Here is your activation link:
+
+{{ site }}/accounts/activate/{{ activation_key }}
+
+{{ expiration_days }} remaining.
