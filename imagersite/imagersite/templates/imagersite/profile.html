@@ -3,5 +3,21 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+<p class ='title'> Target {{user.username}}</p>
+<ul>
+<li>Social_status: {{user.profile.social_status}}</li>
+<li>Social_security_number: {{user.profile.social_security_number}}</li>
+<li>Blood_type: {{user.profile.blood_type}}</li>
+<li>Life_style: {{user.profile.life_style}}</li>
+<li>Next_of_kin: {{user.profile.next_of_kin}}</li>
+<li>Home_address: {{user.profile.home_address}}</li>
+<li>country_of origin: {{user.profile.country_of_origin}}</li>
+<li>Citizenship: {{user.profile.citizenship}}</li>
     <h1>profile</h1>
+    <h2>{{user}}</h2><li>
+    <h2>Number of photos {{photo_num}}</h2><li>
+    <h2>Number of albums: {{album_num}}</h2><li>
+    <h2>Number of public photos {{photo_num_pub}}</h2><li>
+    <h2>Number of public albums: {{album_num_pub}}</h2><li>
+    <h2>Photos uploaded within last week: {{recent}}</h2><li>
 {% endblock %}

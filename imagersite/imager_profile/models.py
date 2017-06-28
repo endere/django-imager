@@ -22,7 +22,7 @@ BLOOD_TYPES = [
 @python_2_unicode_compatible
 class UserProfile(models.Model):
     """A user profile."""
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='profile')
     social_status = models.CharField(max_length=100)
     social_security_number = models.CharField(max_length=100)
     blood_type = models.CharField(

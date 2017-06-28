@@ -1,0 +1,15 @@
+{% extends 'imagersite/home.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <h1>profile</h1>
+    <h2>{{user}}</h2><li>
+    <li>Blood_type: {{user.profile.blood_type}}</li>
+    <li>Next_of_kin: {{user.profile.next_of_kin}}</li>
+    <li>Home_address: {{user.profile.home_address}}</li>
+    <li>Home address security countermeasures: {{user.profile.home_address_security_countermeasures}}</li>
+    <li>NUmber of public photos: {{photo_num}}</li>
+    <li>NUmber of public albums: {{album_num}}</li>
+{% endblock %}

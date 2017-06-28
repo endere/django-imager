@@ -1,0 +1,26 @@
+{% extends 'imagersite/home.html' %}
+{% load thumbnail %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h1>library for {{user.username}}</h1>
+    {% for album in albums %}
+    <h1>Here is an album called {{album.title}}</h1>
+        {% thumbnail album.cover "200x200" as im %}
+        <img src = "{{im.url}}"></img>
+        {% endthumbnail %}
+    <h3>  ^^^^^that is the album cover btw^^^^^ </h3>
+    {% endfor %}
+
+
+
+
+
+    {% for photo in photos %}
+    <p>{{photo.title}}</p>
+    {% thumbnail photo.image "200x200" as im %}
+    <img src = "{{im.url}}"></img>
+    {% endthumbnail %}
+    {% endfor %}
+{% endblock %}
