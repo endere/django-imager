@@ -44,7 +44,6 @@ class Album(models.Model):
     photo = models.ManyToManyField(Photo, null=True, related_name='albums')
     cover = models.ImageField(upload_to='AlbumCover', null=True, default='AlbumCover/default.jpg')
     # cover = models.ForeignKey(Photo, null=True, related_name='+')
-    published = models.CharField(choices=ava, max_length=7)
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     date_created = models.DateField(auto_now_add=True)

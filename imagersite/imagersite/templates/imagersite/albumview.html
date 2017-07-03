@@ -4,14 +4,22 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <h1>Album gallery</h1>
-    <p>Here is a list of the albums with their covers</p>
-    {% for album in albums %}
     {% thumbnail album.cover "300x300" as im %}
     <img src = "{{im.url}}"></img>
     {% endthumbnail %}
     <h1>{{album.title}}</h1>
     <p>{{album.description}}</p>
     <p>{{album.date_created}}</p>
+    <p>{{album.date_modified}}</p>
+    <p>{{album.date_published}}</p>
+
+
+    <p>---------------------------------------</p>
+    <h1>Photos in this album</h1>
+    {% for photo in photos %}
+    <p>{{photo.title}}</p>
+    {% thumbnail photo.image "200x200" as im %}
+    <img src = "{{im.url}}"></img>
+    {% endthumbnail %}
     {% endfor %}
 {% endblock %}

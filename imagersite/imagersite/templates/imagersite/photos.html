@@ -1,7 +1,14 @@
 {% extends 'imagersite/home.html' %}
+{% load thumbnail %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
-    <h1>photos</h1>
+    <h1>photos gallery</h1>
+    {% for photo in photos %}
+    <p>{{photo.title}}</p>
+    {% thumbnail photo.image "200x200" as im %}
+    <img src = "{{im.url}}"></img>
+    {% endthumbnail %}
+    {% endfor %}
 {% endblock %}
