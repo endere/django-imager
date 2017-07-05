@@ -29,16 +29,11 @@ class UserProfile(models.Model):
     def __repr__(self):
         return """
     username: {}
-    social_status: {}
-    social_security_number: {}
-    blood_type: {}
-    life_style: {}
-    next_of_kin: {}
-    home_address: {}
-    home_address_security_countermeasures: {}
-    country_of_origin: {}
-    citizenship: {}
-        """.format(self.user.username, self.social_status, self.social_security_number, self.blood_type, self.life_style, self.next_of_kin, self.home_address, self.home_address_security_countermeasures, self.country_of_origin, self.citizenship)
+    camera_type: {}
+    self_description: {}
+    photo_style: {}
+    royalty_fees: {}
+        """.format(self.user.username, self.camera_type, self.self_description, self.photo_style, self.royalty_fees)
 
         
 

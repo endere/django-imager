@@ -1,26 +1,48 @@
-{% extends 'imagersite/home.html' %}
+{% extends 'imagersite/layout.html' %}
 {% load thumbnail %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Library{% endblock %}
 
 {% block content %}
-    <h1>library for {{user.username}}</h1>
+
+
+    <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{user.username}}
+                    <small>Library</small>
+                </h1>
+            </div>
+        </div>
+
+<h1>Albums</h1>
+
     {% for album in albums %}
-    <h1>Here is an album called {{album.title}}</h1>
-        {% thumbnail album.cover "200x200" as im %}
-        <img src = "{{im.url}}"></img>
-        {% endthumbnail %}
-    <h3>  ^^^^^that is the album cover btw^^^^^ </h3>
+        <div class="col-md-6 portfolio-item">
+            {% thumbnail album.cover "200x200" as im %}
+                    <img src="{{im.url}}" alt="">
+            {% endthumbnail %}
+                <h3>
+                    <a href="/images/albums/{{album.id}}">{{album.title}}</a>
+                </h3>
+                <p>{{album.description}}</p>
+            </div>
     {% endfor %}
 
-
+<h1>Images</h1>
 
 
 
     {% for photo in photos %}
-    <p>{{photo.title}}</p>
-    {% thumbnail photo.image "200x200" as im %}
-    <img src = "{{im.url}}"></img>
-    {% endthumbnail %}
+
+        <div class="col-md-6 portfolio-item">
+            {% thumbnail photo.image "200x200" as im %}
+                    <img src="{{im.url}}" alt="">
+            {% endthumbnail %}
+                <h3>
+                    <a href="/images/photos/{{photo.id}}">{{photo.title}}</a>
+                </h3>
+                <p>{{photo.description}}</p>
+        </div>
     {% endfor %}
 {% endblock %}
+

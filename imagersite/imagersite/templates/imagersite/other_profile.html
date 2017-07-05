@@ -1,15 +1,24 @@
-{% extends 'imagersite/home.html' %}
+{% extends 'imagersite/layout.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Other profile{% endblock %}
 
 {% block content %}
 
-    <h1>profile</h1>
-    <h2>{{user}}</h2><li>
-    <li>Blood_type: {{user.profile.blood_type}}</li>
-    <li>Next_of_kin: {{user.profile.next_of_kin}}</li>
-    <li>Home_address: {{user.profile.home_address}}</li>
-    <li>Home address security countermeasures: {{user.profile.home_address_security_countermeasures}}</li>
-    <li>NUmber of public photos: {{photo_num}}</li>
-    <li>NUmber of public albums: {{album_num}}</li>
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{user}}
+                    <small>Profile</small>
+                </h1>
+            </div>
+        </div>
+<ul>    
+    <li>Number of public photos: {{photo_num}}</li>
+    <li>Number of public albums: {{album_num}}</li>
+    <li>Camera: {{user.profile.camera_type}}</li>
+    <li>Photo_style: {{user.profile.photo_style}}</li>
+    <li>Royalty Fees: {{user.profile.royalty_fees}}</li>
+    <li>Number of public albums: {{album_num_pub}}</li>
+    <li>Email: {{user.profile.email}}</li>
+</ul>
+
 {% endblock %}

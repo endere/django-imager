@@ -6,6 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_views
+from django.core.exceptions import ObjectDoesNotExist
 from imager_images.models import Photo, Album
 import datetime
 def home_view(request):
@@ -40,14 +41,17 @@ def profile_view(request):
 
 
 def other_profile_view(request, name):
-    user = User.objects.get(username=name)
-    photo_count = user.uphotos.filter(published='pub').count
-    album_count = user.ualbums.filter(published='pub').count
-    return render(
-        request,
-        'imagersite/other_profile.html',
-        context={'user': user, 'photo_num': photo_count, 'album_num': album_count}
-    )
+    try:
+        user = User.objects.get(username=name)
+        photo_count = user.uphotos.filter(published='pub').count
+        album_count = user.ualbums.filter(published='pub').count
+        return render(
+            request,
+            'imagersite/other_profile.html',
+            context={'user': user, 'photo_num': photo_count, 'album_num': album_count}
+        )
+    except ObjectDoesNotExist:
+        return redirect(home_view)
 
 def account_view(request):
     return render(request, 'registration/registration_form.html')

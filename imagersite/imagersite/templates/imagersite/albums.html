@@ -1,7 +1,7 @@
-{% extends 'imagersite/home.html' %}
+{% extends 'imagersite/layout.html' %}
 {% load thumbnail %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Albums{% endblock %}
 
 {% block content %}
     <h1>Album gallery</h1>
@@ -10,7 +10,7 @@
     {% thumbnail album.cover "300x300" as im %}
     <img src = "{{im.url}}"></img>
     {% endthumbnail %}
-    <h1>{{album.title}}</h1>
+    <a href="/images/albums/{{album.id}}"><h1>{{album.title}}</h1></a>
     <p>{{album.description}}</p>
     <p>{{album.date_created}}</p>
     {% endfor %}
