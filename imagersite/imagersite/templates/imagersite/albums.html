@@ -1,0 +1,17 @@
+{% extends 'imagersite/layout.html' %}
+{% load thumbnail %}
+
+{% block title %}Albums{% endblock %}
+
+{% block content %}
+    <h1>Album gallery</h1>
+    <p>Here is a list of the albums with their covers</p>
+    {% for album in albums %}
+    {% thumbnail album.cover "300x300" as im %}
+    <img src = "{{im.url}}"></img>
+    {% endthumbnail %}
+    <a href="/images/albums/{{album.id}}"><h1>{{album.title}}</h1></a>
+    <p>{{album.description}}</p>
+    <p>{{album.date_created}}</p>
+    {% endfor %}
+{% endblock %}

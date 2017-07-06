@@ -8,32 +8,16 @@ from django.utils.encoding import python_2_unicode_compatible
 class ImageActiveProfile(models.Manager):
     def get_queryset(self):
         return super(ImageActiveProfile, self).get_queryset().filter(is_active=True)
-BLOOD_TYPES = [
-    ("O+", "O+"),
-    ("O-", "O-"),
-    ("A+", "A+"),
-    ("A-", "A-"),
-    ("B+", "B+"),
-    ("B-", "B-"),
-    ("AB+", "AB+"),
-    ("AB-", "AB-")
-]
+
 
 @python_2_unicode_compatible
 class UserProfile(models.Model):
     """A user profile."""
-    user = models.OneToOneField(User)
-    social_status = models.CharField(max_length=100)
-    social_security_number = models.CharField(max_length=100)
-    blood_type = models.CharField(
-        choices=BLOOD_TYPES,
-        max_length=3)
-    life_style = models.CharField(max_length=100)
-    next_of_kin = models.CharField(max_length=100)
-    home_address = models.CharField(max_length=100)
-    home_address_security_countermeasures = models.CharField(max_length=100)
-    country_of_origin = models.CharField(max_length=100)
-    citizenship = models.CharField(max_length=100)
+    user = models.OneToOneField(User, related_name='profile')
+    camera_type = models.CharField(max_length=50, default='Beseler')
+    self_description = models.CharField(max_length=200, null=True)
+    photo_style = models.CharField(max_length=50, null=True)
+    royalty_fees = models.CharField(max_length=50, null=True)
     objects = models.Manager()
     active = ImageActiveProfile()
     # email_confirmed = models.BooleanField(default=False)
@@ -45,16 +29,11 @@ class UserProfile(models.Model):
     def __repr__(self):
         return """
     username: {}
-    social_status: {}
-    social_security_number: {}
-    blood_type: {}
-    life_style: {}
-    next_of_kin: {}
-    home_address: {}
-    home_address_security_countermeasures: {}
-    country_of_origin: {}
-    citizenship: {}
-        """.format(self.user.username, self.social_status, self.social_security_number, self.blood_type, self.life_style, self.next_of_kin, self.home_address, self.home_address_security_countermeasures, self.country_of_origin, self.citizenship)
+    camera_type: {}
+    self_description: {}
+    photo_style: {}
+    royalty_fees: {}
+        """.format(self.user.username, self.camera_type, self.self_description, self.photo_style, self.royalty_fees)
 
         
 

@@ -1,0 +1,17 @@
+{% extends 'imagersite/layout.html' %}
+
+{% block title %}PhotoView{% endblock %}
+
+{% block content %}
+<h1>Here is an photo called {{photo.title}}</h1>
+        <img src = "{{photo.image.url}}"></img>
+        <p>{{photo.description}}</p>
+        <p>{{photo.date_uploaded}}</p>
+        <p>{{photo.date_modified}}</p>
+        <p>{{photo.date_published}}</p>
+        <p>{{photo.user}}</p>
+
+{% endblock %}
+
+
+    
