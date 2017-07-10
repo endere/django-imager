@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import views as auth_views
 from django.core.exceptions import ObjectDoesNotExist
 from imager_images.models import Photo, Album
+from django.views.generic import DetailView, ListView
 import datetime
 def home_view(request):
     return render(
@@ -53,6 +54,7 @@ def other_profile_view(request, name):
     except ObjectDoesNotExist:
         return redirect(home_view)
 
+
 def account_view(request):
     return render(request, 'registration/registration_form.html')
 
@@ -66,15 +68,20 @@ def library_view(request):
     except AttributeError:
         return auth_views.login(request)
 
-def photo_view(request, photo_id):
-    photo = list(Photo.objects.all())[int(photo_id)]
-    return render(
-        request,
-        'imagersite/photoview.html',
-        context={'photo': photo}
-    )
 
-
+# class photo_view(DetailView):
+#     def get(request, photo_id):
+#         print(photo_id)
+#         photos = list(Photo.objects.all())
+#         photo = ''
+#         for i in photos:
+#             if i.id == int(photo_id):
+#                 photo = i
+#         return render(
+#             request,
+#             'imagersite/photoview.html',
+#             context={'photo': photo}
+#         )
 
 def photo_gallery_view(request):
     photos = list(Photo.objects.all())
@@ -89,14 +96,16 @@ def photo_gallery_view(request):
 
 
 def album_view(request, album_id):
-    album = list(Album.objects.all())[int(album_id)]
+    albums = list(Album.objects.all())
+    for i in albums:
+        if i.id == int(album_id):
+            album = i
     photos = list(album.photo.all())
     return render(
         request,
         'imagersite/albumview.html',
         context={'album': album, 'photos': photos}
     )
-
 
 
 def album_gallery_view(request):
@@ -108,4 +117,4 @@ def album_gallery_view(request):
         request,
         'imagersite/albums.html',
         context={'albums': albums}
-     )
+    )
