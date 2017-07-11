@@ -11,13 +11,19 @@
             </div>
         </div>
 
-
+<img src="
+      {% if profile_pic %}
+          {{ profile_pic.url }}
+      {% else %}
+          {% static 'default_prof.jpg' %}
+      {% endif %}"></img>
+<h5>{{ user.username }}</h5>
 <p>{{user.profile.self_description}}</p>
 
 <ul>
     <li>Number of photos: {{photo_num}}</li>
     <li>Number of albums: {{album_num}}</li>
-    <li>Number of public photos {{photo_num_pub}}</li>
+    <li>Number of public photos: {{photo_num_pub}}</li>
     <li>Number of public albums: {{album_num_pub}}</li>
     <li>Photos uploaded within last week: {{recent}}</li>
 </ul>

@@ -1,3 +1,4 @@
+"""."""
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
@@ -10,6 +11,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from imager_images.models import Photo, Album
 from django.views.generic import DetailView, ListView
 import datetime
+
+
 def home_view(request):
     return render(
         request,
@@ -29,16 +32,17 @@ def profile_view(request):
             x = i.date_published
             if (datetime.date.today() - x).days < 7:
                 number_of_published_photos += 1
-                # print(curr_date)
     except AttributeError:
         return auth_views.login(request)
-
-
     return render(
         request,
         'imagersite/profile.html',
-        context={'user': request.user, 'photo_num': user.uphotos.count, 'album_num': user.ualbums.count, 'album_num_pub':album_count_pub, 'photo_num_pub': photo_count_pub, 'recent': number_of_published_photos}
-    )
+        context={'user': request.user, 'photo_num': user.uphotos.count,
+                 'album_num': user.ualbums.count,
+                 'album_num_pub': album_count_pub,
+                 'photo_num_pub': photo_count_pub,
+                 'recent': number_of_published_photos,
+                 'profile_pic': user.profile_pic})
 
 
 def other_profile_view(request, name):
@@ -91,8 +95,7 @@ def photo_gallery_view(request):
     return render(
         request,
         'imagersite/photos.html',
-        context={'photos': photos}
-     )
+        context={'photos': photos})
 
 
 def album_view(request, album_id):
@@ -116,5 +119,4 @@ def album_gallery_view(request):
     return render(
         request,
         'imagersite/albums.html',
-        context={'albums': albums}
-    )
+        context={'albums': albums})

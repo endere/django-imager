@@ -15,8 +15,8 @@ ava = [
 
 class Photo(models.Model):
     """A photo model."""
-    user = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='uphotos')
-    image = models.ImageField(upload_to='photos', null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uphotos')
+    image = models.ImageField(upload_to='photos')
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     date_uploaded = models.DateField(auto_now=True)
@@ -41,7 +41,7 @@ class Photo(models.Model):
 class Album(models.Model):
     """A album model"""
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='ualbums')
-    photo = models.ManyToManyField(Photo, null=True, related_name='albums')
+    photo = models.ManyToManyField(Photo, related_name='albums')
     cover = models.ImageField(upload_to='AlbumCover', null=True, default='AlbumCover/default.jpg')
     # cover = models.ForeignKey(Photo, null=True, related_name='+')
     title = models.CharField(max_length=100)
