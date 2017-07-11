@@ -42,7 +42,7 @@ def profile_view(request):
                  'album_num_pub': album_count_pub,
                  'photo_num_pub': photo_count_pub,
                  'recent': number_of_published_photos,
-                 'profile_pic': user.profile_pic})
+                 'profile_pic': user.profile.profile_pic})
 
 
 def other_profile_view(request, name):
