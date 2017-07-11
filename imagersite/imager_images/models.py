@@ -41,9 +41,8 @@ class Photo(models.Model):
 class Album(models.Model):
     """A album model"""
     user = models.ForeignKey(User, null=False, on_delete=models.CASCADE, related_name='ualbums')
-    photo = models.ManyToManyField(Photo, related_name='albums')
-    cover = models.ImageField(upload_to='AlbumCover', null=True, default='AlbumCover/default.jpg')
-    # cover = models.ForeignKey(Photo, null=True, related_name='+')
+    photo = models.ManyToManyField(Photo, related_name='albums', blank=True)
+    cover = models.ForeignKey(Photo, blank=True, null=True, related_name='+')
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     date_created = models.DateField(auto_now_add=True)

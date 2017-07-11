@@ -24,6 +24,7 @@ from imager_profile.models import UserProfile
 from imagersite.views import home_view, ProfileView, library_view, photo_gallery_view, album_view, album_gallery_view
 from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(
         template_name='imagersite/home.html'), name='home'),
