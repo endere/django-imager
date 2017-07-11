@@ -1,3 +1,4 @@
+"""."""
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
@@ -10,6 +11,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from imager_images.models import Photo, Album
 from django.views.generic import DetailView, ListView
 import datetime
+
+
 def home_view(request):
     return render(
         request,
@@ -17,42 +20,13 @@ def home_view(request):
         context={}
     )
 
+class ProfileView(DetailView):
 
-def profile_view(request):
-    user = request.user
-    try:
-        photo_count_pub = user.uphotos.filter(published='pub').count
-        album_count_pub = user.ualbums.filter(published='pub').count
-        # curr_date = str(datetime.datetime.now()).split(' ')[0].split('-')
-        number_of_published_photos = 0
-        for i in user.uphotos.all():
-            x = i.date_published
-            if (datetime.date.today() - x).days < 7:
-                number_of_published_photos += 1
-                # print(curr_date)
-    except AttributeError:
-        return auth_views.login(request)
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+        return queryset.get().user
 
-
-    return render(
-        request,
-        'imagersite/profile.html',
-        context={'user': request.user, 'photo_num': user.uphotos.count, 'album_num': user.ualbums.count, 'album_num_pub':album_count_pub, 'photo_num_pub': photo_count_pub, 'recent': number_of_published_photos}
-    )
-
-
-def other_profile_view(request, name):
-    try:
-        user = User.objects.get(username=name)
-        photo_count = user.uphotos.filter(published='pub').count
-        album_count = user.ualbums.filter(published='pub').count
-        return render(
-            request,
-            'imagersite/other_profile.html',
-            context={'user': user, 'photo_num': photo_count, 'album_num': album_count}
-        )
-    except ObjectDoesNotExist:
-        return redirect(home_view)
 
 
 def account_view(request):
@@ -69,20 +43,6 @@ def library_view(request):
         return auth_views.login(request)
 
 
-# class photo_view(DetailView):
-#     def get(request, photo_id):
-#         print(photo_id)
-#         photos = list(Photo.objects.all())
-#         photo = ''
-#         for i in photos:
-#             if i.id == int(photo_id):
-#                 photo = i
-#         return render(
-#             request,
-#             'imagersite/photoview.html',
-#             context={'photo': photo}
-#         )
-
 def photo_gallery_view(request):
     photos = list(Photo.objects.all())
     for photo in photos:
@@ -91,8 +51,7 @@ def photo_gallery_view(request):
     return render(
         request,
         'imagersite/photos.html',
-        context={'photos': photos}
-     )
+        context={'photos': photos})
 
 
 def album_view(request, album_id):
@@ -116,5 +75,4 @@ def album_gallery_view(request):
     return render(
         request,
         'imagersite/albums.html',
-        context={'albums': albums}
-    )
+        context={'albums': albums})
