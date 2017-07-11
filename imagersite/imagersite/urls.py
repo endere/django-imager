@@ -24,6 +24,7 @@ from imager_profile.models import UserProfile
 from imagersite.views import home_view, profile_view, other_profile_view, library_view, photo_gallery_view, album_view, album_gallery_view
 from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
+
 urlpatterns = [
     url(r'^$', home_view, name='home'),
     url(r'^admin/', admin.site.urls),
@@ -49,7 +50,7 @@ urlpatterns = [
         context_object_name="user",
         pk_url_kwarg="username"), name='other_profile'),
     url(r'^library/$', library_view, name='library'),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
 
 
 if settings.DEBUG:

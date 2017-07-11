@@ -16,7 +16,7 @@
           {{ profile_pic.url }}
       {% else %}
           {% static 'default_prof.jpg' %}
-      {% endif %}"></img>
+      {% endif %}" height="250" width="250"></img>
 <h5>{{ user.username }}</h5>
 <p>{{user.profile.self_description}}</p>
 
@@ -33,6 +33,6 @@
 <h3>Royalty Fees: {{user.profile.royalty_fees}}</h3>
 
 
-<button type="button" class="btn"><a href="/library">View Library</a></button>
-<button type="button" class="btn"><a href="/logout">Logout</a></button>
+<a href="/library"><button type="button" class="btn">View Library</button></a>
+<a href="/logout"><button type="button" class="btn">Logout</button></a>
 {% endblock %}

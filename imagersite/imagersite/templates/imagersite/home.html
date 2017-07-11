@@ -8,16 +8,16 @@
         </div>
     </div>
     {% if user.is_authenticated %}
-    <button type="button" class="btn"><a href="/accounts/profile">Account</a></button>
-    <button type="button" class="btn"><a href="/logout">Logout</a></button>
+    <a href="/accounts/profile"><button type="button" class="btn">Account</button></a>
+    <a href="/logout"><button type="button" class="btn">Logout</button></a>
     {% else %}
-    <button type="button" class="btn"><a href="/login">Login</a></button>
-    <button type="button" class="btn"><a href="/accounts/register">Create an account</a></button>
+    <a href="/login"><button type="button" class="btn">Login</button></a>
+    <a href="/accounts/register"><button type="button" class="btn">Create an account</button></a>
     {% endif %}
-    <button type="button" class="btn"><a href="/library">Library</a></button>
+    <a href="/library"><button type="button" class="btn">Library</button></a>
     <ul>
-    <button type="button" class="btn"><a href="/images/albums">Albums</a></button>
-    <button type="button" class="btn"><a href="/images/photos">Photos</a></button>
+    <a href="/images/albums"><button type="button" class="btn">Albums</button></a>
+    <a href="/images/photos"><button type="button" class="btn">Photos</button></a>
     </ul>
 
 {% endblock %}
