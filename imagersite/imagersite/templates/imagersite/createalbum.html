@@ -1,0 +1,22 @@
+{% extends 'imagersite/layout.html' %}
+{% load thumbnail %}
+
+{% block title %}Create{% endblock %}
+
+{% block content %}
+    <h1>Create Album</h1>
+    <form>
+      Title:<br>
+      <input type="text" name="title" value="title"><br>
+      description:<br>
+      <input type="text" name="description" value="description">
+      <form action="/action_page.php">
+      Cover:<br>
+      <input type="file" name="pic" accept="image/*">
+      <input type="submit">
+    </form>
+
+    </form>
+{% endblock %}
+
+

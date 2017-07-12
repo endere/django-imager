@@ -67,7 +67,7 @@ urlpatterns = [
         model=UserProfile,
         context_object_name="user"), name='library'),
     url(r'^images/photos/add/$', PhotoCreate.as_view(
-        template_name='imagersite/create.html',
+        template_name='imagersite/createphoto.html',
         model=Photo,
         context_object_name="photos"), name='photo_create'),
     url(r'^images/albums/add/$', AlbumCreate.as_view(

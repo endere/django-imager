@@ -25,10 +25,16 @@ class PhotoCreate(CreateView):
 
     def form_valid(self, form):
         """docstring."""
+
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return super(CreateView, self).form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        import pdb; pdb.set_trace()
+        return self.form_valid(form)
 
 
 class AlbumCreate(CreateView):
