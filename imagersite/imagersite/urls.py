@@ -42,7 +42,7 @@ urlpatterns = [
         paginate_by='10',
         queryset=Photo.objects.all(),
         context_object_name='photos'), name='photo_gallery'),
-    url(r'^images/photos/(?P<pk>\w+)/$', DetailView.as_view(
+    url(r'^images/photos/(?P<pk>\d+)/$', DetailView.as_view(
         template_name="imagersite/photoview.html",
         model=Photo,
         context_object_name="photo"), name="photo"),
@@ -52,11 +52,11 @@ urlpatterns = [
         paginate_by='10',
         queryset=Album.objects.all(),
         context_object_name='albums'), name='album_gallery'),
-    url(r'^images/albums/(?P<pk>\w+)/$', DetailView.as_view(
+    url(r'^images/albums/(?P<pk>\d+)/$', DetailView.as_view(
         template_name="imagersite/albumview.html",
         model=Album,
         context_object_name="album"), name='album'),
-    url(r'^accounts/profile/(?P<username>\w+)/$', ProfileView.as_view(
+    url(r'^accounts/profile/(?P<username>\w+\d+)/$', ProfileView.as_view(
         template_name='imagersite/other_profile.html',
         model=UserProfile,
         context_object_name="user",
