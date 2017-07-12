@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
-    url(r'^accounts/profile/$', ProfileView.as_view(
+    url(r'^profile/$', ProfileView.as_view(
         template_name='imagersite/profile.html',
         model=UserProfile,
         context_object_name="user"), name='profile'),
@@ -56,7 +56,7 @@ urlpatterns = [
         template_name="imagersite/albumview.html",
         model=Album,
         context_object_name="album"), name='album'),
-    url(r'^accounts/profile/(?P<username>\w+\d+)/$', ProfileView.as_view(
+    url(r'^profile/(?P<username>\w+\d+)/$', ProfileView.as_view(
         template_name='imagersite/other_profile.html',
         model=UserProfile,
         context_object_name="user",
@@ -67,11 +67,11 @@ urlpatterns = [
         model=UserProfile,
         context_object_name="user"), name='library'),
     url(r'^images/photos/add/$', PhotoCreate.as_view(
-        template_name='imagersite/create.html',
+        template_name='imagersite/create_photo.html',
         model=Photo,
         context_object_name="photos"), name='photo_create'),
     url(r'^images/albums/add/$', AlbumCreate.as_view(
-        template_name='imagersite/create.html',
+        template_name='imagersite/create_album.html',
         model=Album,
         context_object_name="albums"), name='album_create'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

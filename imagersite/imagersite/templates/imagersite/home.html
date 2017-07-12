@@ -1,23 +1,32 @@
 {% extends 'imagersite/layout.html' %}
+{% load static %}
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Django imager site
-                <small>Created for CodeFellows Python 401 by Sean Beseler and Erik Enderlein</small>
+            <h1 class="page-header">Djangogram
+                <small>A Django project by Sean Beseler, Erik Enderlein, and Chris Hudson</small>
             </h1>
         </div>
     </div>
-    {% if user.is_authenticated %}
-    <a href="/accounts/profile"><button type="button" class="btn">Account</button></a>
-    <a href="/logout"><button type="button" class="btn">Logout</button></a>
+    <h2>Picture of the day</h2>
+    <img class="day_pic" src="
+    {% if image %}
+        {{ image|random }}
     {% else %}
-    <a href="/login"><button type="button" class="btn">Login</button></a>
-    <a href="/accounts/register"><button type="button" class="btn">Create an account</button></a>
+        {% static 'default_pic.jpg' %}
     {% endif %}
-    <a href="/library"><button type="button" class="btn">Library</button></a>
+    ">
     <ul>
-    <a href="/images/albums"><button type="button" class="btn">Albums</button></a>
-    <a href="/images/photos"><button type="button" class="btn">Photos</button></a>
+        {% if user.is_authenticated %}
+        <a href="/accounts/profile"><button type="button" class="btn">Account</button></a>
+        <a href="/logout"><button type="button" class="btn">Logout</button></a>
+        {% else %}
+        <a href="/login"><button type="button" class="btn">Login</button></a>
+        <a href="/accounts/register"><button type="button" class="btn">Create an account</button></a>
+        {% endif %}
+        <a href="/library"><button type="button" class="btn">Library</button></a>
+        <a href="/images/albums"><button type="button" class="btn">Albums</button></a>
+        <a href="/images/photos"><button type="button" class="btn">Photos</button></a>
     </ul>
 
 {% endblock %}

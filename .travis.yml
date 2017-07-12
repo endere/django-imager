@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.6"
+
+env:
+  - SECRET_KEY='potato' DATABASE_NAME='usersdb' DATABASE_USER='' DATABASE_HOST="127.0.0.1" DATABASE_PASSWORD=''
+
+install:
+  - pip install -U pip
+  - pip install -r requirements.pip
+  - pip install coverage
+  - pip install coveralls
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c 'create database testdb;' -U postgres
+
+script:
+  - python imagersite/manage.py test imagersite
