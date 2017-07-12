@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from imager_images.models import Photo, Album
 from django.contrib.auth.models import User
 from imager_profile.models import UserProfile
-from imagersite.views import home_view, ProfileView, library_view, photo_gallery_view, album_view, album_gallery_view
+from imagersite.views import ProfileView, PhotoCreate, AlbumCreate
 from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
 
@@ -66,6 +66,14 @@ urlpatterns = [
         template_name='imagersite/library.html',
         model=UserProfile,
         context_object_name="user"), name='library'),
+    url(r'^images/photos/add/$', PhotoCreate.as_view(
+        template_name='imagersite/create.html',
+        model=Photo,
+        context_object_name="photos"), name='photo_create'),
+    url(r'^images/albums/add/$', AlbumCreate.as_view(
+        template_name='imagersite/create.html',
+        model=Album,
+        context_object_name="albums"), name='album_create'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
