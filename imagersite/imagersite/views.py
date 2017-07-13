@@ -3,17 +3,19 @@ from imager_images.models import Photo, Album
 from django.views.generic import DetailView, CreateView
 from django.urls import reverse_lazy
 from imagersite.forms import PhotoForm, AlbumForm
+from imager_profile.models import UserProfile
 import datetime
 
 
 class ProfileView(DetailView):
     """."""
+    model = UserProfile
 
     def get_object(self, queryset=None):
         """."""
         if queryset is None:
             queryset = self.get_queryset()
-        return queryset.get().user
+        return queryset.get(user = self.request.user)
 
 
 class PhotoCreate(CreateView):
