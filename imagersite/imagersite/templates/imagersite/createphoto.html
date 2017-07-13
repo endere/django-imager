@@ -5,7 +5,7 @@
 
 {% block content %}
     <h1>Create Photo</h1>
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
     {{ form.as_p }}
     {% csrf_token %}
 
