@@ -53,3 +53,12 @@ class AlbumCreate(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super(CreateView, self).form_valid(form)
+
+
+class LibraryView(DetailView):
+
+    def get_object(self, queryset=None):
+        """."""
+        if queryset is None:
+            queryset = self.get_queryset()
+        return queryset.get().user

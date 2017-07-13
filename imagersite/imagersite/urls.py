@@ -62,7 +62,7 @@ urlpatterns = [
         context_object_name="user",
         slug_url_kwarg='username',
         slug_field='username'), name='other_profile'),
-    url(r'^library/$', ListView.as_view(
+    url(r'^library/$', ProfileView.as_view(
         template_name='imagersite/library.html',
         model=UserProfile,
         context_object_name="user"), name='library'),
