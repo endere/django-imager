@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from imager_images.models import Photo, Album
 from django.contrib.auth.models import User
 from imager_profile.models import UserProfile
-from imagersite.views import ProfileView, PhotoCreate, AlbumCreate, HomeView
+from imagersite.views import ProfileView, PhotoCreate, AlbumCreate, OtherProfileView
 from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
 
@@ -59,13 +59,13 @@ urlpatterns = [
         template_name="imagersite/albumview.html",
         model=Album,
         context_object_name="album"), name='album'),
-    url(r'^accounts/profile/(?P<username>\w+\d+)/$', ProfileView.as_view(
+    url(r'^accounts/profile/(?P<username>\w+\d+)/$', OtherProfileView.as_view(
         template_name='imagersite/other_profile.html',
         model=UserProfile,
         context_object_name="user",
         slug_url_kwarg='username',
         slug_field='username'), name='other_profile'),
-    url(r'^library/$', ListView.as_view(
+    url(r'^library/$', ProfileView.as_view(
         template_name='imagersite/library.html',
         model=UserProfile,
         context_object_name="user"), name='library'),
@@ -74,7 +74,7 @@ urlpatterns = [
         model=Photo,
         context_object_name="photos"), name='photo_create'),
     url(r'^images/albums/add/$', AlbumCreate.as_view(
-        template_name='imagersite/create.html',
+        template_name='imagersite/createalbum.html',
         model=Album,
         context_object_name="albums"), name='album_create'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
