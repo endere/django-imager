@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from imager_images.models import Photo, Album
 from django.contrib.auth.models import User
 from imager_profile.models import UserProfile
-from imagersite.views import ProfileView, PhotoCreate, AlbumCreate, OtherProfileView
+from imagersite.views import ProfileView, PhotoCreate, AlbumCreate, OtherProfileView, HomeView
 from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
 

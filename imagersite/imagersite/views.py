@@ -14,14 +14,15 @@ class HomeView(DetailView):
 
     def get_object(self, queryset=None):
         """."""
+        # import pdb; pdb.set_trace()
         if queryset is None:
             queryset = Photo.objects.all()
             y = queryset.count()
             if y == 0:
-               queryset = None
+                queryset = None
             else:
-                x = randint(1, y)
-                queryset = queryset.get(pk=x)
+                # x = randint(1, y)
+                queryset = queryset.order_by('?').first()
         return queryset
 
 
