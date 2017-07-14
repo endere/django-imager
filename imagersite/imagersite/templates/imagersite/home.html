@@ -1,5 +1,6 @@
 {% extends 'imagersite/layout.html' %}
 {% block content %}
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Django imager site
@@ -10,6 +11,8 @@
     {% if user.is_authenticated %}
     <a href="/accounts/profile"><button type="button" class="btn">Account</button></a>
     <a href="/logout"><button type="button" class="btn">Logout</button></a>
+    <a href="/images/photos/add/"><button type="button" class="btn">Add Photo</button></a>
+    <a href="/images/albums/add/"><button type="button" class="btn">Add Album</button></a>
     {% else %}
     <a href="/login"><button type="button" class="btn">Login</button></a>
     <a href="/accounts/register"><button type="button" class="btn">Create an account</button></a>

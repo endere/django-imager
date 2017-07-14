@@ -5,7 +5,7 @@
 {% block content %}
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">{{user.username}}
+                <h1 class="page-header">{{user.user.username}}
                     <small>Account page</small>
                 </h1>
             </div>
@@ -17,8 +17,8 @@
       {% else %}
           {% static 'default_prof.jpg' %}
       {% endif %}" height="250" width="250"></img>
-<h5>{{ user.username }}</h5>
-<p>{{user.profile.self_description}}</p>
+<h5>{{ user.user.username }}</h5>
+<p>{{user.user.profile.self_description}}</p>
 
 <ul>
     <li>Number of photos: {{photo_num}}</li>
@@ -28,9 +28,9 @@
     <li>Photos uploaded within last week: {{recent}}</li>
 </ul>
 
-<h3>Camera: {{user.profile.camera_type}}</h3>
-<h3>Photo_style: {{user.profile.photo_style}}</h3>
-<h3>Royalty Fees: {{user.profile.royalty_fees}}</h3>
+<h3>Camera: {{user.user.profile.camera_type}}</h3>
+<h3>Photo_style: {{user.user.profile.photo_style}}</h3>
+<h3>Royalty Fees: {{user.user.profile.royalty_fees}}</h3>
 
 
 <a href="/library"><button type="button" class="btn">View Library</button></a>

@@ -15,7 +15,19 @@ class ProfileView(DetailView):
         """."""
         if queryset is None:
             queryset = self.get_queryset()
-        return queryset.get(user = self.request.user)
+        # import pdb; pdb.set_trace()
+        return queryset.get(user=self.request.user)
+
+class OtherProfileView(DetailView):
+    """."""
+    model = UserProfile
+
+    def get_object(self, queryset=None):
+        """."""
+        if queryset is None:
+            queryset = self.get_queryset()
+        return queryset.get(user__username=self.kwargs['username'])
+
 
 
 class PhotoCreate(CreateView):
@@ -41,26 +53,11 @@ class AlbumCreate(CreateView):
     form_class = AlbumForm
     success_url = reverse_lazy('library')
 
-    def get_form(self, form):
-        """docstring."""
-        form = super(AlbumCreate, self).get_form()
-        uphotos = Photo.objects.filter(user=self.request.user)
-        form.fields['photos'].queryset = uphotos
-        form.fields['cover'].queryset = uphotos
-        return form
-
     def form_valid(self, form):
         """docstring."""
+
         self.object = form.save(commit=False)
         self.object.user = self.request.user
         self.object.save()
         return super(CreateView, self).form_valid(form)
 
-
-class LibraryView(DetailView):
-
-    def get_object(self, queryset=None):
-        """."""
-        if queryset is None:
-            queryset = self.get_queryset()
-        return queryset.get().user

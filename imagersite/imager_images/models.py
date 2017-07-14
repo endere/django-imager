@@ -26,16 +26,11 @@ class Photo(models.Model):
 
     def __repr__(self):
         return """
-    user: {}
-    image: {}
     title: {}
-    description: {}
-    date_uploaded: {}
-    date_modified: {}
-    date_published: {}
-    published: {}
-        """.format(self.user, self.image, self.title, self.description, self.date_uploaded, self.date_modified, self.date_published, self.published)
+        """.format(self.title)
 
+    def __str__(self):
+        return self.__repr__()
 
 
 class Album(models.Model):
@@ -52,13 +47,8 @@ class Album(models.Model):
 
     def __repr__(self):
         return """
-    user: {}
-    photo: {}
-    cover: {}
     title: {}
-    description: {}
-    date_created: {}
-    date_modified: {}
-    date_published: {}
-    published: {}
-        """.format(self.user, self.photo, self.cover, self.title, self.description, self.date_created, self.date_modified, self.date_published, self.published)
+        """.format(self.title)
+
+    def __str__(self):
+        return self.__repr__()

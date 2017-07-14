@@ -10,7 +10,7 @@ class PhotoForm(forms.ModelForm):
         """."""
 
         model = Photo
-        exclude = []
+        exclude = ['user']
         widgets = {
             'description': forms.Textarea()
         }
