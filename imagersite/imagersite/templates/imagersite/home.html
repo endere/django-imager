@@ -1,4 +1,5 @@
 {% extends 'imagersite/layout.html' %}
+{% load static %}
 {% block content %}
 
     <div class="row">
@@ -22,5 +23,10 @@
     <a href="/images/albums"><button type="button" class="btn">Albums</button></a>
     <a href="/images/photos"><button type="button" class="btn">Photos</button></a>
     </ul>
-
+    <img src="
+      {% if photos %}
+          {{ photos.img.url }}
+      {% else %}
+          {% static 'default_prof.jpg' %}
+      {% endif %}" height="250" width="250"></img>
 {% endblock %}

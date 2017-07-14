@@ -26,8 +26,11 @@ from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(
-        template_name='imagersite/home.html'), name='home'),
+    url(r'^$', HomeView.as_view(
+        template_name='imagersite/home.html',
+        model=Photo,
+        queryset=Photo.objects.all(),
+        context_object_name='photos'), name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
