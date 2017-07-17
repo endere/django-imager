@@ -4,7 +4,7 @@
 {% block title %}Albumview{% endblock %}
 
 {% block content %}
-    {% thumbnail album.cover "300x300" as im %}
+    {% thumbnail album.cover.image "300x300" as im %}
     <img src = "{{im.url}}"></img>
     {% endthumbnail %}
     <h1>{{album.title}}</h1>
@@ -16,10 +16,11 @@
 
     <p>---------------------------------------</p>
     <h1>Photos in this album</h1>
-    {% for photo in photos %}
+    {% for photo in album.photo.all %}
     <p>{{photo.title}}</p>
     {% thumbnail photo.image "200x200" as im %}
     <img src = "{{im.url}}"></img>
     {% endthumbnail %}
     {% endfor %}
+    <a href="/images/albums/update/{{album.id}}"><button type="button" class="btn">Update Album</button></a>
 {% endblock %}

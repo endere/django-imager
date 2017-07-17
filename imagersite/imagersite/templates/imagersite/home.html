@@ -1,5 +1,7 @@
 {% extends 'imagersite/layout.html' %}
+{% load static %}
 {% block content %}
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Django imager site
@@ -8,16 +10,23 @@
         </div>
     </div>
     {% if user.is_authenticated %}
-    <button type="button" class="btn"><a href="/accounts/profile">Account</a></button>
-    <button type="button" class="btn"><a href="/logout">Logout</a></button>
+    <a href="/accounts/profile"><button type="button" class="btn">Account</button></a>
+    <a href="/logout"><button type="button" class="btn">Logout</button></a>
+    <a href="/images/photos/add/"><button type="button" class="btn">Add Photo</button></a>
+    <a href="/images/albums/add/"><button type="button" class="btn">Add Album</button></a>
     {% else %}
-    <button type="button" class="btn"><a href="/login">Login</a></button>
-    <button type="button" class="btn"><a href="/accounts/register">Create an account</a></button>
+    <a href="/login"><button type="button" class="btn">Login</button></a>
+    <a href="/accounts/register"><button type="button" class="btn">Create an account</button></a>
     {% endif %}
-    <button type="button" class="btn"><a href="/library">Library</a></button>
+    <a href="/library"><button type="button" class="btn">Library</button></a>
     <ul>
-    <button type="button" class="btn"><a href="/images/albums">Albums</a></button>
-    <button type="button" class="btn"><a href="/images/photos">Photos</a></button>
+    <a href="/images/albums"><button type="button" class="btn">Albums</button></a>
+    <a href="/images/photos"><button type="button" class="btn">Photos</button></a>
     </ul>
-
+    <img src="
+      {% if photos %}
+          {{ photos.image.url }}
+      {% else %}
+          {% static 'default_prof.jpg' %}
+      {% endif %}" height="250" width="250"></img>
 {% endblock %}

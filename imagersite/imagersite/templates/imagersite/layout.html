@@ -14,7 +14,7 @@
     <link href="{% static 'imagersite/bootstrap.css' %}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{% static 'imagersite/2-col-portfolio.css' %}" rel="stylesheet">
+    <link href="{% static 'imagersite/layout.css' %}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,21 +43,24 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="/library">Library</a>
+                    </li>
                     {% if user.is_authenticated %}
                     <li>
-                    <a href="/accounts/profile">{{ user.username }}</a>    
+                        <a href="/accounts/profile">{{ user.username }}</a>
                     </li>
                     <li>
-                    <a href="/logout">Logout</a>    
+                        <a href="/logout">Logout</a>
                     </li>
                     {% else %}
+                    <li>
+                        <a href="/accounts/register">Register</a>
+                    </li>
                     <li>
                         <a href="/login">Login</a>
                     </li>
                     {% endif %}
-                    <li>
-                        <a href="/library">Library</a>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

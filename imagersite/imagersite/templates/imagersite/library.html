@@ -1,5 +1,6 @@
 {% extends 'imagersite/layout.html' %}
 {% load thumbnail %}
+{% load static %}
 
 {% block title %}Library{% endblock %}
 
@@ -8,7 +9,7 @@
 
     <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">{{user.username}}
+                <h1 class="page-header">{{user.user.username}}
                     <small>Library</small>
                 </h1>
             </div>
@@ -16,23 +17,24 @@
 
 <h1>Albums</h1>
 
-    {% for album in albums %}
-        <div class="col-md-6 portfolio-item">
-            {% thumbnail album.cover "200x200" as im %}
-                    <img src="{{im.url}}" alt="">
-            {% endthumbnail %}
-                <h3>
-                    <a href="/images/albums/{{album.id}}">{{album.title}}</a>
-                </h3>
-                <p>{{album.description}}</p>
-            </div>
+    {% for album in user.user.ualbums.all %}
+    <div class="col-md-6 portfolio-item">
+        {% thumbnail album.cover.image "200x200" as im %}
+            <img src="{{im.url}}" alt="">
+        {% empty %}
+            <img src="{% static 'default_alb.png' %}" height="150" width="150"/>
+        {% endthumbnail %}
+        <h3>
+            <a href="/images/albums/{{album.id}}">{{album.title}}</a>
+        </h3>
+        <p>{{album.description}}</p>
+    </div>
     {% endfor %}
 
 <h1>Images</h1>
 
 
-
-    {% for photo in photos %}
+    {% for photo in user.user.uphotos.all %}
 
         <div class="col-md-6 portfolio-item">
             {% thumbnail photo.image "200x200" as im %}

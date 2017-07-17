@@ -1,32 +1,38 @@
 {% extends 'imagersite/layout.html' %}
-
+{% load static %}
 {% block title %}Profile{% endblock %}
 
 {% block content %}
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">{{user.username}}
+                <h1 class="page-header">{{user.user.username}}
                     <small>Account page</small>
                 </h1>
             </div>
         </div>
 
-
-<p>{{user.profile.self_description}}</p>
+<img src="
+      {% if profile_pic %}
+          {{ profile_pic.url }}
+      {% else %}
+          {% static 'default_prof.jpg' %}
+      {% endif %}" height="250" width="250"></img>
+<h5>{{ user.user.username }}</h5>
+<p>{{user.user.profile.self_description}}</p>
 
 <ul>
     <li>Number of photos: {{photo_num}}</li>
     <li>Number of albums: {{album_num}}</li>
-    <li>Number of public photos {{photo_num_pub}}</li>
+    <li>Number of public photos: {{photo_num_pub}}</li>
     <li>Number of public albums: {{album_num_pub}}</li>
     <li>Photos uploaded within last week: {{recent}}</li>
 </ul>
 
-<h3>Camera: {{user.profile.camera_type}}</h3>
-<h3>Photo_style: {{user.profile.photo_style}}</h3>
-<h3>Royalty Fees: {{user.profile.royalty_fees}}</h3>
+<h3>Camera: {{user.user.profile.camera_type}}</h3>
+<h3>Photo_style: {{user.user.profile.photo_style}}</h3>
+<h3>Royalty Fees: {{user.user.profile.royalty_fees}}</h3>
 
 
-<button type="button" class="btn"><a href="/library">View Library</a></button>
-<button type="button" class="btn"><a href="/logout">Logout</a></button>
+<a href="/library"><button type="button" class="btn">View Library</button></a>
+<a href="/logout"><button type="button" class="btn">Logout</button></a>
 {% endblock %}

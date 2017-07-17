@@ -1,0 +1,17 @@
+{% extends 'imagersite/layout.html' %}
+{% load thumbnail %}
+
+{% block title %}Create{% endblock %}
+
+{% block content %}
+    <h1>Create Photo</h1>
+    <form method="POST" enctype='multipart/form-data'>
+    {{ form.as_p }}
+    {% csrf_token %}
+
+      <input type="submit">
+    </form>
+
+{% endblock %}
+
+
