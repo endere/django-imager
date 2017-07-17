@@ -1,6 +1,6 @@
 """."""
 from imager_images.models import Photo, Album
-from django.views.generic import DetailView, CreateView, ListView, TemplateView
+from django.views.generic import DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from imagersite.forms import PhotoForm, AlbumForm
 from imager_profile.models import UserProfile
@@ -65,6 +65,22 @@ class PhotoCreate(CreateView):
         return super(CreateView, self).form_valid(form)
 
 
+class PhotoUpdate(UpdateView):
+    """."""
+
+    model = Photo
+    form_class = PhotoForm
+    success_url = reverse_lazy('library')
+
+    def form_valid(self, form):
+        """docstring."""
+
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(UpdateView, self).form_valid(form)
+
+
 class AlbumCreate(CreateView):
     """."""
 
@@ -79,4 +95,20 @@ class AlbumCreate(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return super(CreateView, self).form_valid(form)
+
+
+class AlbumUpdate(UpdateView):
+    """."""
+
+    model = Album
+    form_class = AlbumForm
+    success_url = reverse_lazy('library')
+
+    def form_valid(self, form):
+        """docstring."""
+
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return super(UpdateView, self).form_valid(form)
 
