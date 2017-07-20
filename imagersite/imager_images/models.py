@@ -3,6 +3,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
+from taggit.managers import TaggableManager
 import datetime
 
 ava = [
@@ -23,6 +24,7 @@ class Photo(models.Model):
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(auto_now_add=True)
     published = models.CharField(choices=ava, max_length=7, default='prv')
+    tags = TaggableManager()
 
     def __repr__(self):
         return """
@@ -44,6 +46,7 @@ class Album(models.Model):
     date_modified = models.DateField(auto_now=True)
     date_published = models.DateField(auto_now_add=True)
     published = models.CharField(choices=ava, max_length=7, default='prv')
+    tags = TaggableManager()
 
     def __repr__(self):
         return """

@@ -1,6 +1,6 @@
 """."""
 from imager_images.models import Photo, Album
-from django.views.generic import DetailView, CreateView, UpdateView
+from django.views.generic import DetailView, CreateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from imagersite.forms import PhotoForm, AlbumForm
 from imager_profile.models import UserProfile
@@ -34,7 +34,6 @@ class ProfileView(DetailView):
         """."""
         if queryset is None:
             queryset = self.get_queryset()
-        # import pdb; pdb.set_trace()
         return queryset.get(user=self.request.user)
 
 class OtherProfileView(DetailView):
@@ -112,3 +111,19 @@ class AlbumUpdate(UpdateView):
         self.object.save()
         return super(UpdateView, self).form_valid(form)
 
+
+class TagIndexView(ListView):
+    """."""
+
+    model = Photo
+    template_name = 'imagersite/photos.html'
+    context_object_name = 'tags'
+
+    def get_queryset(self):
+        import pdb; pdb.set_trace()
+        return Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
+    # import pdb; pdb.set_trace()
+    # queryset=Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
+    # def get_object(self):
+    #     import pdb; pdb.set_trace()
+    #     return Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
