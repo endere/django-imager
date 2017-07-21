@@ -5,6 +5,8 @@ from django.urls import reverse_lazy
 from imagersite.forms import PhotoForm, AlbumForm
 from imager_profile.models import UserProfile
 import random
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
 import datetime
 
 
@@ -155,5 +157,41 @@ class PhotoView(DetailView):
             for photo in (Photo.objects.filter(tags__slug=tag.slug)):
                 if photo not in obj.related_photos and photo != obj:
                     obj.related_photos.append(photo)
-        obj.related_photos = random.sample(obj.related_photos, 5)
+        indexnumber = 5 if len(obj.related_photos) > 5 else len(obj.related_photos)
+        obj.related_photos = random.sample(obj.related_photos, indexnumber)
         return obj
+
+class PhotosetView(ListView):
+
+    def get_context_data(self, **kwargs):
+        """Code gained from docs. https://docs.djangoproject.com/en/1.10/topics/pagination/"""
+        context = super(PhotosetView, self).get_context_data(**kwargs)
+        request = context['view'].request
+        photo_list = Photo.objects.all()
+        paginator = Paginator(photo_list, 4) 
+        page = request.GET.get('page')
+        try:
+            context['photos'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['photos'] = paginator.page(1)
+        except EmptyPage:
+            context['photos'] = paginator.page(paginator.num_pages)
+        return context
+
+
+class AlbumsetView(ListView):
+
+    def get_context_data(self, **kwargs):
+        """Code gained from docs. https://docs.djangoproject.com/en/1.10/topics/pagination/"""
+        context = super(AlbumsetView, self).get_context_data(**kwargs)
+        request = context['view'].request
+        Album_list = Album.objects.all()
+        paginator = Paginator(Album_list, 4) 
+        page = request.GET.get('page')
+        try:
+            context['Albums'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['Albums'] = paginator.page(1)
+        except EmptyPage:
+            context['Albums'] = paginator.page(paginator.num_pages)
+        return context

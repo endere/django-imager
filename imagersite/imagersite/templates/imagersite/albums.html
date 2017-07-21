@@ -14,4 +14,19 @@
     <p>{{album.description}}</p>
     <p>{{album.date_created}}</p>
     {% endfor %}
+    <div class="pagination">
+    <span class="step-links">
+        {% if Albums.has_previous %}
+            <a href="?page={{ Albums.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ Albums.number }} of {{ Albums.paginator.num_pages }}.
+        </span>
+
+        {% if Albums.has_next %}
+            <a href="?page={{ Albums.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+    </div>
 {% endblock %}
