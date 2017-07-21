@@ -63,7 +63,6 @@ class PhotoCreate(CreateView):
         self.object.save()
         return super(CreateView, self).form_valid(form)
 
-
 class PhotoUpdate(UpdateView):
     """."""
 

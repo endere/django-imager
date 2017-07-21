@@ -31,6 +31,7 @@ urlpatterns = [
         model=Photo,
         queryset=Photo.objects.all(),
         context_object_name='photos'), name='home'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
