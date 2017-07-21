@@ -4,7 +4,7 @@ from django.views.generic import DetailView, CreateView, UpdateView, ListView
 from django.urls import reverse_lazy
 from imagersite.forms import PhotoForm, AlbumForm
 from imager_profile.models import UserProfile
-from random import randint
+import random
 import datetime
 
 
@@ -120,10 +120,41 @@ class TagIndexView(ListView):
     context_object_name = 'tags'
 
     def get_queryset(self):
-        import pdb; pdb.set_trace()
-        return Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
-    # import pdb; pdb.set_trace()
-    # queryset=Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
-    # def get_object(self):
-    #     import pdb; pdb.set_trace()
-    #     return Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
+        tag_object = Photo.objects.filter(tags__slug=self.kwargs.get('slug'))
+        tag_object.name = self.kwargs.get('slug')
+        return tag_object
+
+
+class AlbumView(DetailView):
+    """."""
+    model = Album
+
+    def get_object(self, queryset=None):
+        """."""
+        if queryset is None:
+            queryset = self.get_queryset()
+        obj = queryset.get(pk=self.kwargs['pk'])
+        obj.tag_list = []
+        for photo in obj.photo.all():
+            for tag in photo.tags.all():
+                if tag not in obj.tag_list:
+                    obj.tag_list.append(tag)
+        return obj
+
+
+class PhotoView(DetailView):
+    """."""
+    model = Album
+
+    def get_object(self, queryset=None):
+        """."""
+        if queryset is None:
+            queryset = self.get_queryset()
+        obj = queryset.get(pk=self.kwargs['pk'])
+        obj.related_photos = []
+        for tag in obj.tags.all():
+            for photo in (Photo.objects.filter(tags__slug=tag.slug)):
+                if photo not in obj.related_photos and photo != obj:
+                    obj.related_photos.append(photo)
+        obj.related_photos = random.sample(obj.related_photos, 5)
+        return obj
