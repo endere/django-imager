@@ -12,6 +12,10 @@
     <p>{{album.date_created}}</p>
     <p>{{album.date_modified}}</p>
     <p>{{album.date_published}}</p>
+    <p>Tags:</p>
+    {% for tag in album.tag_list %}
+            <p>{{tag}}</p>
+    {% endfor %}
 
 
     <p>---------------------------------------</p>
@@ -20,6 +24,10 @@
     <p>{{photo.title}}</p>
     {% thumbnail photo.image "200x200" as im %}
     <img src = "{{im.url}}"></img>
+    <p>Tags:</p>
+        {% for tag in photo.tags.all %}
+                <p>{{tag}}</p>
+        {% endfor %}
     {% endthumbnail %}
     {% endfor %}
     <a href="/images/albums/update/{{album.id}}"><button type="button" class="btn">Update Album</button></a>

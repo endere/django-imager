@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 from imager_images.models import Photo, Album
 from django.contrib.auth.models import User
 from imager_profile.models import UserProfile
-from imagersite.views import ProfileView, PhotoCreate, AlbumCreate, OtherProfileView, HomeView, PhotoUpdate, AlbumUpdate
+from imagersite.views import ProfileView, PhotoCreate, PhotoView, AlbumView, AlbumsetView, PhotosetView, TagIndexView, AlbumCreate, OtherProfileView, HomeView, PhotoUpdate, AlbumUpdate
 from django.contrib.auth import views as auth_views
 # from imagersite.imagersite import views as core_views
 
@@ -31,6 +31,7 @@ urlpatterns = [
         model=Photo,
         queryset=Photo.objects.all(),
         context_object_name='photos'), name='home'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
@@ -39,23 +40,27 @@ urlpatterns = [
         template_name='imagersite/profile.html',
         model=UserProfile,
         context_object_name="user"), name='profile'),
-    url(r'^images/photos/$', ListView.as_view(
+    url(r'^tag/(?P<slug>[-\w]+)/$', TagIndexView.as_view(
+        template_name='imagersite/tags.html',
+        model=Photo,
+        context_object_name='tags'), name='tag'),
+    url(r'^images/photos/$', PhotosetView.as_view(
         template_name='imagersite/photos.html',
         model=Photo,
-        paginate_by='10',
+        paginate_by='4',
         queryset=Photo.objects.all(),
         context_object_name='photos'), name='photo_gallery'),
-    url(r'^images/photos/(?P<pk>\d+)/$', DetailView.as_view(
+    url(r'^images/photos/(?P<pk>\d+)/$', PhotoView.as_view(
         template_name="imagersite/photoview.html",
         model=Photo,
         context_object_name="photo"), name="photo"),
-    url(r'^images/albums/$', ListView.as_view(
+    url(r'^images/albums/$', AlbumsetView.as_view(
         template_name='imagersite/albums.html',
         model=Album,
-        paginate_by='10',
+        paginate_by='4',
         queryset=Album.objects.all(),
         context_object_name='albums'), name='album_gallery'),
-    url(r'^images/albums/(?P<pk>\d+)/$', DetailView.as_view(
+    url(r'^images/albums/(?P<pk>\d+)/$', AlbumView.as_view(
         template_name="imagersite/albumview.html",
         model=Album,
         context_object_name="album"), name='album'),

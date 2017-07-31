@@ -1,5 +1,5 @@
 {% extends 'imagersite/layout.html' %}
-
+{% load thumbnail %}
 {% block title %}PhotoView{% endblock %}
 
 {% block content %}
@@ -10,8 +10,18 @@
         <p>{{photo.date_modified}}</p>
         <p>{{photo.date_published}}</p>
         <p>{{photo.user}}</p>
+        <p>Tags:</p>
+        {% for tag in photo.tags.all %}
+           <a href='/tag/{{tag}}'> <p>{{tag}}</p> </a>
+        {% endfor %}
     <a href="/images/photos/update/{{photo.id}}"><button type="button" class="btn">Update Photo</button></a>
-
+        <h2>Here are some related photos:</h2>
+            {% for photo in photo.related_photos %}
+                <a href="/images/photos/{{photo.id}}"><h1>{{photo.title}}</h1></a>
+                {% thumbnail photo.image "200x200" as im %}
+                <img src = "{{im.url}}"></img>
+                {% endthumbnail %}
+            {% endfor %}
 {% endblock %}
 
 

@@ -45,6 +45,10 @@
                 </h3>
                 <p>{{photo.description}}</p>
         </div>
+    <p>Tags:</p>
+        {% for tag in photo.tags.all %}
+            <p>{{tag}}</p>
+        {% endfor %}
     {% endfor %}
 {% endblock %}
 
